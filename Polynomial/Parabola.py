@@ -2,7 +2,7 @@ from Polynomial import Polynomial
 
 class Parabola(Polynomial):
 
-        """
+    """
     Class representing a parabola  with the form y = ax^2 + bx +c 
 
     Attributes
