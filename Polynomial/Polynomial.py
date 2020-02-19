@@ -2,10 +2,25 @@
 
 class Polynomial:
 
+    """
+    Class representing polynomials. 
+
+    The polynomial has the form 
+
+        f(x) = Sum_i=0^n c[i]x^i
+
+    Attributes
+    ----------
+    coefficients : A list with the polynomial  coefficients
+                   the first entry is the constant  
+
+    """
+
     def __init__(self, coefficients=[-1,0,1]):
         self.coefficients = list(coefficients)
 
     def __call__(self,x):
+        """ returns the valuie of the polynomial for a value of x """
         result = self.coefficients[-1]
         # reverse sum (computationally efficient)
         # run from second last coefficient to first (-1 so stops at 0)
@@ -29,6 +44,7 @@ class Polynomial:
 
 
     def __mul__(self, other):
+        """ returns the product of tweo polynomials """
         c = self.coefficients
         d = other.coefficients
         M = len(c) - 1
@@ -57,12 +73,14 @@ class Polynomial:
 
 
     def __eq__(self,other):
+        """ returns true if the coefficients of two polynomials are equivalent """
         return self.coefficients == other.coefficients
 
     def __ne__(self, other):
         return not self.__eq__(other)
 
     def __gt__(self, other):
+        """ returns true if self has the highest order or if same has largest coefficient """
         # return the polynomial with highest order 
         # else with one with largest coefficient 
         if len(self.coefficients) == len(other.coefficients):

@@ -27,12 +27,15 @@ class Particle:
         return 'Particle: {0}, Mass: {1:12.3e}, Position: {2}, Velocity: {3}, Acceleration: {4}'.format(self.Name,self.mass,self.position, self.velocity,self.acceleration)
 
     def KineticEnergy(self):
+        """ Returns the kinetic energy of the particle in J """
         return 0.5*self.mass*np.vdot(self.velocity,self.velocity)
   
     def momentum(self):
+        """ Returns the momentum  of the particle in kg⋅m/s as a numpy array of type float """
         return self.mass*np.array(self.velocity,dtype=float)
 
     def update(self, deltaT):
+        """ updates the position and velocity of the particle based on current acceleration using the Euler method """
         self.position +=  self.velocity*deltaT
         self.velocity +=  self.acceleration*deltaT
 
