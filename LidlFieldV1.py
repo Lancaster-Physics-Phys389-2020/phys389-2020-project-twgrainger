@@ -6,8 +6,8 @@ class ElectricAcceleration:
     bodies = []
     def __init__(self, bodies):
         self.bodies = bodies
-    def acceleration(self, mag1, mag2, mag3, elec1, elec2, elec3):
-        constantelectric=np.array([elec1, elec2, elec3])
+    def acceleration(self, mag1, mag2, mag3, sinelec1, sinelec2, sinelec3):
+        constantelectric=np.array([sinelec1, sinelec2, sinelec3])
         magnetic=np.array([mag1, mag2, mag3])
         magnitudeMagnetic=np.linalg.norm(magnetic)
         
