@@ -12,8 +12,8 @@ time = 0
 switches=1
 speed=1
 speed2=1
-deltaT=0.000001
-MaxTime=0.1
+deltaT=0.00001
+MaxTime=0.01
 #choice = str(input("Select the time step? y/n:"))
 #if choice=="y":
 #    deltaT = float(input("Select the time step:"))
@@ -71,7 +71,7 @@ while (time < MaxTime):
     ParticleAccelerator.acceleration(mag1,mag2,mag3, sinelec1, sinelec2, sinelec3)
     for particle in ParticleAccelerator.bodies:
        if np.linalg.norm(particle.velocity)>=1e8:
-            deltaT=(0.00001)/np.linalg.norm(particle.velocity)
+            deltaT=(10)/np.linalg.norm(particle.velocity)
             #print(time)
             #print("v=",np.linalg.norm(particle.velocity))
             particle.update(deltaT)
@@ -79,21 +79,21 @@ while (time < MaxTime):
             deltaT=0.00001
             #print(time)
             particle.update(deltaT)
-    if particle.position[0]>1000000:
+    if particle.position[0]>10000:
         elec1=0
         mag1=0
         elec2=0
         mag2=0
         elec3=0
         mag3=0
-    if particle.position[1]>1000000:
+    if particle.position[1]>10000:
         elec1=0
         mag1=0
         elec2=0
         mag2=0
         elec3=0
         mag3=0
-    if particle.position[2]>1000000:
+    if particle.position[2]>10000:
         elec1=0
         mag1=0
         elec2=0
