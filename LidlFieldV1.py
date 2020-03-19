@@ -12,6 +12,7 @@ class ElectricAcceleration:
         magnitudeMagnetic=np.linalg.norm(magnetic)
         
         for particle1 in self.bodies:
+            electricSection=0
             acceleration = np.array([0., 0., 0.])
             potentialEnergy = 0
             for particle2 in self.bodies:
@@ -31,14 +32,12 @@ class ElectricAcceleration:
                     #electricSection=np.array([1,1,0])
                     
                     electric=np.array([const*(c2/magnitudeR**2)])
-                    electricSection = ((electric/magnitudeR)*r)+constantelectric
+                    electricSection += ((electric/magnitudeR)*r)
                     
-                    #update magnetic with input functions
-                    g = (-scipy.constants.G*m2)/(magnitudeR**2)
-                    gSection = (g/magnitudeR)*r
-                    
-                    qvb=np.cross((c1*v1), magnetic)
-                    acceleration=(((c1*electricSection)+(qvb))/m1)+acceleration+gSection
+            #update magnetic with input functions
+            totalelectric=electricSection+constantelectric        
+            qvb=np.cross((c1*v1), magnetic)
+            acceleration=(((c1*totalelectric)+(qvb))/m1)+acceleration
 
             particle1.acceleration = acceleration
             #print(acceleration)

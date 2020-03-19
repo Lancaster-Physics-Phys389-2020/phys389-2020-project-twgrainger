@@ -5,7 +5,7 @@ from Particle import ChargedParticle
 from LidlFieldV1 import ElectricAcceleration
 import copy
 
-particles=[ChargedParticle([1e-3, 0, 0], [1e4, 0, 0], [0, 0, 0], "proton", scipy.constants.proton_mass, scipy.constants.proton_mass, scipy.constants.e), ChargedParticle([0, 0, 0], [0, 1e4, 0], [0, 0, 0], "proton", scipy.constants.proton_mass, scipy.constants.proton_mass, scipy.constants.e)]
+particles=[ChargedParticle([1e-3, 0, 0], [1e4, 0, 0], [0, 0, 0], "proton", scipy.constants.proton_mass, scipy.constants.proton_mass, scipy.constants.e), ChargedParticle([0, 0, 0], [1e4, 0, 0], [0, 0, 0], "proton", scipy.constants.proton_mass, scipy.constants.proton_mass, scipy.constants.e),ChargedParticle([-1e-3, 0, 0], [1e4, 0, 0], [0, 0, 0], "proton", scipy.constants.proton_mass, scipy.constants.proton_mass, scipy.constants.e),ChargedParticle([0, 1E-3, 0], [1e4, 0, 0], [0, 0, 0], "proton", scipy.constants.proton_mass, scipy.constants.proton_mass, scipy.constants.e)]
 
 ParticleAccelerator=ElectricAcceleration(particles)
 time = 0
@@ -30,7 +30,7 @@ for particle in ParticleAccelerator.bodies:
     
 data = []
 elec1=1
-elec2=1
+elec2=0
 elec3=0
 mag1=0
 mag2=0
