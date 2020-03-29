@@ -7,7 +7,7 @@ class Particle:
     Name = ""
     Restmass=0
     mass = 0
-    potentialEnergy = 0
+    kineticE = 0
     momentum = 0
     angularMomentum = 0
     def __init__(self, Position=np.array([0,0,0], dtype=float), Velocity=np.array([0,0,0], dtype=float), Acceleration=np.array([0,-10,0], dtype=float), Name='', Restmass=1.0, mass=1.00):
@@ -39,15 +39,16 @@ class Particle:
             self.mass=self.Restmass/(np.sqrt(1-(self.velocity**2)/scipy.constants.c**2))
             self.position = self.position + (np.array(self.velocity)*deltaT)
             self.velocity = self.velocity + (np.array(self.acceleration)*deltaT)
-            
-    #def KineticEnergy(self):
-    #    return 0.5*self.mass*np.vdot(self.velocity,self.velocity)
-  
+        
    # def momentum(self):
    #     return self.mass*np.array(self.velocity,dtype=float)
 class ChargedParticle(Particle):
     def __init__(self, Position=np.array([0,0,0], dtype=float), Velocity=np.array(([0,0,0]), dtype=float), Acceleration=np.array([0,-10,0], dtype=float), Name='Ball', Restmass=1.0, mass=1.0, Charge=1.0):
         Particle.__init__(self, Position=Position, Velocity=Velocity, Acceleration=Acceleration, Name=Name, Restmass=Restmass, mass=mass)
         self.charge=Charge
+    def KineticEnergy(self):
+            kineticE=0.5*self.mass*np.vdot(self.velocity,self.velocity)    
+            return(kineticE)
     def __repr__(self):
         return 'Charged Particle: {0}, Rest Mass: {1:12.3e}, Mass: {2:12.3e}, Charge: {3:12.3e}, Position: {4}, Velocity: {5}, Acceleration: {6}'.format(self.Name,self.Restmass,self.mass,self.charge,self.position, self.velocity,self.acceleration)
+  
