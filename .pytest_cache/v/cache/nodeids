@@ -1,0 +1,4 @@
+[
+  "test_neutral.py::test_file1_accelerator",
+  "test_nofield.py::test_file2_accelerator"
+]

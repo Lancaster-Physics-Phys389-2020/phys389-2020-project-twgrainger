@@ -13,9 +13,10 @@ seed()
 #    time=0
 #    def __init__(self, particles=np.array([])):
 #        self.particles=particles
-"""When the accelerator function is called the format must be as follows, Accelerator([list of particles and their properties], max time the simulation is run for)"""
+"""When the accelerator function is called the format must be as follows, Accelerator([list of particles and their properties], max time the simulation is run for, the magnetic field values, the electric field values)"""
 """'particles' is the list of particles we want to run the code over, to add another particle simply add a new item to the list 'particles' in the format ChargedParticle([x position, y position, z position], [x velocity, y velocity, z velocity], [x acceleration, y acceleration, z acceleration], "particle name", particle rest mass, particle current mass, particle charge)"""
-def Accelerator(particles, MaxTime):    
+"""The magnetic and electric field values are set here, these must be imputed in the following format, [magnetic/electic field x value, magnetic/electric field y value, magnetic/electric field z value]"""
+def Accelerator(particles, MaxTime, magField, elecField):    
     
     #
     #particles=[ChargedParticle([(random()), random(), random()], [(1e4), 0, 0], [0, 0, 0], "proton", scipy.constants.proton_mass, scipy.constants.proton_mass, scipy.constants.e), ChargedParticle([(random()), random(), random()], [1e4, 0, 0], [0, 0, 0], "proton", scipy.constants.proton_mass, scipy.constants.proton_mass, scipy.constants.e),ChargedParticle([(random()), random(), random()], [1e4, 0, 0], [0, 0, 0], "proton", scipy.constants.proton_mass, scipy.constants.proton_mass, scipy.constants.e),ChargedParticle([(random()), random(), random()], [1e4, 0, 0], [0, 0, 0], "proton", scipy.constants.proton_mass, scipy.constants.proton_mass, scipy.constants.e)]
@@ -43,13 +44,13 @@ def Accelerator(particles, MaxTime):
         print(particle.kineticE)
     """An empty list is produced for the data to be added to, this will allow it to be plotted easily in the analysis file"""    
     data = []
-    """The x, y and z componets of the electric and magnetic fields are set here (elec/mag1 is the x component, elec/mag2 the y and elec/mag3 the z"""
-    elec1=1
-    elec2=0
-    elec3=0
-    mag1=0
-    mag2=0
-    mag3=3.8
+    """The x, y and z componets of the electric and magnetic fields are set here by taking the previously set values from the lists magField and elecField (elec/mag1 is the x component, elec/mag2 the y and elec/mag3 the z)"""
+    elec1=elecField[0]
+    elec2=elecField[1]
+    elec3=elecField[2]
+    mag1=magField[0]
+    mag2=magField[1]
+    mag3=magField[2]
     """The average electric and magnetic field are calculated, this is necessary for the calculations making the applied electric field sinusoidal"""
     magAVG=(mag1**2+mag2**2+mag3**2)**0.5
     elecAVG=(elec1**2+elec2**2+elec3**3)**0.5
@@ -109,12 +110,10 @@ def Accelerator(particles, MaxTime):
         data.append(item)
     """The list 'data' is saved as a npy file for further analysis"""
     np.save(r"D:\Python\NewProject\CodingProjectBogV2\IfYouReadThisThenItWorked.npy",data)
-    for particle in ParticleAccelerator.bodies:
-        print(particle.kineticE)
     #print(switchTime, sinelec1, sinelec2, sinelec3)
     #print(elec1, elec2, elec3)
     #print(particles)
     #print(elec1, elec2, elec3, mag1, mag2, mag3)
 """This calls the accelerator function, the number of particles and their properties as well as the max time are set here"""
 """The random function is used here to allow each particle to have a slightly different kinetic energy. The function will select a random number between 0 and 1 so to obtain a more fitting magnitude it has been multiplied by a constant."""
-Accelerator([ChargedParticle([(1e-3*random()), (1E-3*random()), (1E-3*random())], [(1e4*random()) , 0, 0], [0, 0, 0], "proton", scipy.constants.proton_mass, scipy.constants.proton_mass, scipy.constants.e), ChargedParticle([(1E-3*random()), (1E-3*random()), (1E-3*random())], [1e4*random(), 0, 0], [0, 0, 0], "proton", scipy.constants.proton_mass, scipy.constants.proton_mass, scipy.constants.e),ChargedParticle([(1E-3*random()), (1E-3*random()), (1E-3*random())], [1e4*random(), 0, 0], [0, 0, 0], "proton", scipy.constants.proton_mass, scipy.constants.proton_mass, scipy.constants.e),ChargedParticle([(1E-3*random()), (1E-3*random()), (1E-3*random())], [1e4*random(), 0, 0], [0, 0, 0], "proton", scipy.constants.proton_mass, scipy.constants.proton_mass, scipy.constants.e)], 0.0000035)
+Accelerator([ChargedParticle([(1e-3*random()), (1E-3*random()), (1E-3*random())], [(1e4*random()) , 0, 0], [0, 0, 0], "proton", scipy.constants.proton_mass, scipy.constants.proton_mass, scipy.constants.e), ChargedParticle([(1E-3*random()), (1E-3*random()), (1E-3*random())], [1e4*random(), 0, 0], [0, 0, 0], "proton", scipy.constants.proton_mass, scipy.constants.proton_mass, scipy.constants.e),ChargedParticle([(1E-3*random()), (1E-3*random()), (1E-3*random())], [1e4*random(), 0, 0], [0, 0, 0], "proton", scipy.constants.proton_mass, scipy.constants.proton_mass, scipy.constants.e),ChargedParticle([(1e-3*random()), (1E-3*random()), (1E-3*random())], [1e4*random(), 0, 0], [0, 0, 0], "proton", scipy.constants.proton_mass, scipy.constants.proton_mass, scipy.constants.e)], 0.0000005,[0,0,3.8], [1,0,0])

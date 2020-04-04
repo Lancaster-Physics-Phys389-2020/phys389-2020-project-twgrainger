@@ -1,15 +1,14 @@
 import numpy as np
 import scipy.constants
 class Particle:
+    """The position, velocity and acceleration are set to be arrays, the name of the particle is set to be a string and its mass, kinetic energy and rest mass are set to be floats"""
     position = np.array([0., 0., 0.])
     velocity = np.array([0., 0., 0.])
     acceleration = np.array([0., 0., 0.])
     Name = ""
-    Restmass=0
-    mass = 0
-    kineticE = 0
-    momentum = 0
-    angularMomentum = 0
+    Restmass=0.0
+    mass = 0.0
+    kineticE = 0.0
     def __init__(self, Position=np.array([0,0,0], dtype=float), Velocity=np.array([0,0,0], dtype=float), Acceleration=np.array([0,-10,0], dtype=float), Name='', Restmass=1.0, mass=1.00):
         self.Name = Name
         self.position = np.array(Position,dtype=float)
@@ -40,13 +39,15 @@ class Particle:
             self.position = self.position + (np.array(self.velocity)*deltaT)
             self.velocity = self.velocity + (np.array(self.acceleration)*deltaT)
         
-   # def momentum(self):
-   #     return self.mass*np.array(self.velocity,dtype=float)
+
 class ChargedParticle(Particle):
+    """The ChargedParticle class inherits the position, velocity, acceleration, mass and rest mass attributes from the particle class"""
     def __init__(self, Position=np.array([0,0,0], dtype=float), Velocity=np.array(([0,0,0]), dtype=float), Acceleration=np.array([0,-10,0], dtype=float), Name='Ball', Restmass=1.0, mass=1.0, Charge=1.0):
         Particle.__init__(self, Position=Position, Velocity=Velocity, Acceleration=Acceleration, Name=Name, Restmass=Restmass, mass=mass)
+        """The ChargedParticle class is given an additional attribute 'charge'"""
         self.charge=Charge
     def KineticEnergy(self):
+            """The kinetic energy is calculated here using the relativistic mass"""
             kineticE=0.5*self.mass*np.vdot(self.velocity,self.velocity)    
             return(kineticE)
     def __repr__(self):

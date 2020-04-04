@@ -14,17 +14,22 @@ class ElectricAcceleration:
         magnitudeMagnetic=np.linalg.norm(magnetic)
         
         for particle1 in self.bodies:
-            electricSection=0
+            """The electric field due to particle-particle interactions and the acceleration are set to be arrays"""
+            electricSection=np.array([0., 0., 0.])
             acceleration = np.array([0., 0., 0.])
+            """The charge mass and velocity of the particles are set to be their values as calculated in the particle class"""
+            c1 = particle1.charge
+            m1 = particle1.mass
+            v1 = particle1.velocity
             #kineticE = 0
             for particle2 in self.bodies:
                 if particle1 != particle2:
                     """This allows the calculation of the acceleration due to the electric and magnetic fields for each body in the system"""
-                    m1 = particle1.mass
+                    
                     m2 = particle2.mass
-                    c1 = particle1.charge
+                    
                     c2 = particle2.charge
-                    v1 = particle1.velocity
+                    
                     v2 = particle2.velocity
                     """This calculates the distance between the accelerating body and the body causing the acceleration, this will only apply when 2 or more charged particles are present""" 
                     r = np.array(particle1.position) - np.array(particle2.position)
